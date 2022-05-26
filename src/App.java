@@ -154,20 +154,22 @@ public class App{
             LocalDate dataFimLocalDate = LocalDate.parse(dataFim, dtf);
             
             //Filtrando a lista de vendas pelo período
-            list_Vendas.stream()
-            .filter( venda-> 
-            venda.getdataVenda().compareTo(dataInicioLocalDate) > -1 
-                && venda.getdataVenda().compareTo(dataFimLocalDate) < 1 );
+            // list_Vendas.stream()
+            // .filter( venda-> 
+            // venda.getdataVenda().isAfter(dataInicioLocalDate)
+            //     && venda.getdataVenda().isBefore(dataFimLocalDate));
             DoubleSummaryStatistics resumovenda = list_Vendas.stream()
             .collect(Collectors.summarizingDouble(Venda::getvalorVenda));
             System.out.println("--------------------------------Vendas por Período------------------------------------");
             System.out.printf("%7s %20s %20s %20s\n", "Data Venda", "Produto", "Quantidade","Valor Total");
             System.out.println("--------------------------------------------------------------------------------------");
             for (Venda venda : list_Vendas) {
+                if(venda.getdataVenda().isAfter(dataInicioLocalDate) && venda.getdataVenda().isBefore(dataFimLocalDate)){
                 System.out.printf( "%7s %20s %20s %20s\n",venda.getdataVenda(), venda.getprodutoVendido(), venda.getquantidadevendida(), venda.getvalorVenda());
+                };
                 }
             System.out.println("----------------------------------Resumo Médio---------------------------------------");
-            System.out.printf( "Menor valor %s - Média de valor %s - Maior valor %s\n",resumovenda.getMin(), resumovenda.getAverage(),resumovenda.getMax());
+            System.out.printf( " Média de venda R$ %s - ", resumovenda.getAverage());
 
             return null;
             

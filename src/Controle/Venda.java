@@ -9,8 +9,8 @@ public class Venda {
     private double _valorVenda;
 
 
-    public Venda(LocalDate datavenda, String produtoVendido, int quantidadeVendida, double valorVenda) {
-        _dataVenda = datavenda;
+    public Venda(LocalDate dataVenda, String produtoVendido, int quantidadeVendida, double valorVenda) {
+        _dataVenda = dataVenda;
         _produtoVendido = produtoVendido;
         _quantidadevendida = quantidadeVendida;
         _valorVenda=valorVenda;
