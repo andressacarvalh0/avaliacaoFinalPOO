@@ -122,7 +122,7 @@ public class App{
             String produtoVendido = scanner.nextLine();
             for (Produto produto: list_Produtos) {
                 if (produto != null && produto.getcodigo().equals(produtoVendido)) {
-                    System.out.println("Data da venda: ");
+                    System.out.println("Data da venda no formato dd/MM/yy: ");
                     String datavenda = scanner.nextLine();
                     System.out.println("Quantidade vendida: ");
                     int quantidadeVendida = scanner.nextInt();
@@ -154,10 +154,11 @@ public class App{
             LocalDate dataFimLocalDate = LocalDate.parse(dataFim, dtf);
             
             //Filtrando a lista de vendas pelo período
-            DoubleSummaryStatistics resumovenda = list_Vendas.stream()
+            list_Vendas.stream()
             .filter( venda-> 
             venda.getdataVenda().compareTo(dataInicioLocalDate) > -1 
-                && venda.getdataVenda().compareTo(dataFimLocalDate) < 1 )
+                && venda.getdataVenda().compareTo(dataFimLocalDate) < 1 );
+            DoubleSummaryStatistics resumovenda = list_Vendas.stream()
             .collect(Collectors.summarizingDouble(Venda::getvalorVenda));
             System.out.println("--------------------------------Vendas por Período------------------------------------");
             System.out.printf("%7s %20s %20s %20s\n", "Data Venda", "Produto", "Quantidade","Valor Total");
